@@ -1,0 +1,55 @@
+version: "3.8"
+
+networks:
+  infra:
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/deamon
+      - ./ssl:/usr/lib/ssl/
+    image: deamon:test
+    container_name: deamontest2
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - infra
+    
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./ssl:/usr/lib/ssl/
+    ports:
+      - "33077:3306"
+    environment:
+      MYSQL_DATABASE: compta
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - infra
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    restart: always
+    ports:
+      - '8888:80'
+    environment:
+      PMA_HOST: mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - infra
