@@ -14,8 +14,8 @@ channel = connexion.channel()
 
 
 exchange_name = 'erp'
-created_queue = 'eng.created'
-created_route_key = 'created'
+created_queue = 'eng.controlled'
+created_route_key = 'controlled'
 
 dbe_queue= 'db.execute'
 dbe_route_key = 'dbe'
@@ -31,12 +31,12 @@ def callback(ch, method, props, body):
             exchange=exchange_name,
             routing_key=dbe_route_key,
             body= body)
-    print("[+] ublished on DBE:" )
+    print("[+] Published on DBE:" )
 
 channel.basic_consume(
     queue=created_queue,
     on_message_callback=callback,
     auto_ack=True)
     
-print('[+] Waiting for messages from cratedDeamon')
+print('[+] Waiting for messages from ControlledDeamon')
 channel.start_consuming() 
