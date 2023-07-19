@@ -4,16 +4,31 @@ networks:
   infra:
 
 services:
-  app:
+  createddeamon:
     build: .
     volumes:
       - .:/deamon
       - ./ssl:/usr/lib/ssl/
-    image: deamon:test
-    container_name: deamontest2
+    image: deamon:created
+    container_name: createddeamon
     depends_on:
       mysql:
         condition: service_healthy
+    command: ["python3", "./pubsub/createdeamon.py"]
+    networks:
+      - infra
+
+  controlleddeamon:
+    build: .
+    volumes:
+      - .:/deamon
+      - ./ssl:/usr/lib/ssl/
+    image: deamon:controlled
+    container_name: controlleddeamon
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: ["python3", "./pubsub/controlleddeamon.py"]
     networks:
       - infra
     

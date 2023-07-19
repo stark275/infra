@@ -13,15 +13,11 @@ connexion = pika.BlockingConnection(
 
 channel = connexion.channel()
 
-
-
-
-
 def getDb():
     mydb = mysql.connector.connect(
         host="mysql",
         user="root",
-        password="root",
+        password="root",    
         database="compta"
     )
     
