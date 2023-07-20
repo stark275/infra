@@ -31,7 +31,35 @@ services:
     command: ["python3", "./pubsub/controlleddeamon.py"]
     networks:
       - infra
-    
+
+  confimeddeamon:
+    build: .
+    volumes:
+      - .:/deamon
+      - ./ssl:/usr/lib/ssl/
+    image: deamon:confimed
+    container_name: confimeddeamon
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: ["python3", "./pubsub/confimeddeamon.py"]
+    networks:
+      - infra 
+
+  dbexecutedeamon:
+    build: .
+    volumes:
+      - .:/deamon
+      - ./ssl:/usr/lib/ssl/
+    image: deamon:dbe
+    container_name: dbexecutedeamon
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: ["python3", "./pubsub/dbexecutedeamon.py"]
+    networks:
+      - infra 
+  
   mysql:
     image: mysql
     container_name: mysql

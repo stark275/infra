@@ -1,0 +1,11 @@
+Container Health check
+https://stackoverflow.com/questions/42567475/docker-compose-check-if-mysql-connection-is-ready
+
+How to use string.replace() in python 3.x
+https://stackoverflow.com/questions/9452108/how-to-use-string-replace-in-python-3-x
+
+Is it recommended to run systemd inside docker container?
+https://stackoverflow.com/questions/51979553/is-it-recommended-to-run-systemd-inside-docker-container
+
+Restart Docker container on inner process crash
+https://stackoverflow.com/questions/56583099/restart-docker-container-on-inner-process-crash

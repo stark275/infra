@@ -13,18 +13,27 @@ connexion = pika.BlockingConnection(
 
 channel = connexion.channel()
 
-def getDb():
-    mydb = mysql.connector.connect(
-        host="mysql",
+mydb = mysql.connector.connect(
+        host="localhost",
         user="root",
         password="root",    
-        database="compta"
+        database="compta",
+        port="33077"
+    )
+
+def getDb():
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="root",    
+        database="compta",
+        port="33077"
     )
     
     mycursor = mydb.cursor()
 
     sql = "INSERT INTO engagements (name) VALUES (%s)"
-    val = ("achat mobilier",)
+    val = ("achat Vehicule",)
     mycursor.execute(sql, val)
 
     mydb.commit()
@@ -37,7 +46,15 @@ def execute(request):
 
 def callback(ch, method, props, body):
     print("[-] Receved: %r" % body)
-    execute("Ce personnage est important")
+
+    mycursor = mydb.cursor()
+    clean_query =  str(body)[1:].replace("'","")
+    mycursor.execute(clean_query)
+    mydb.commit()
+
+    print(mycursor.rowcount, "success!")
+
+    
 
 
 channel.basic_consume(
@@ -45,6 +62,6 @@ channel.basic_consume(
     on_message_callback=callback,
     auto_ack=True)
 
-print('[+] Waiting for messages')
-getDb()
+print('[+] Waiting for messages From DBE')
+# getDb()
 channel.start_consuming() 
