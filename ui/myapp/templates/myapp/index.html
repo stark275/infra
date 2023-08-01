@@ -56,7 +56,7 @@
               </div>
 
               <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                {% if eng %}
+                {% if engs %}
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -93,7 +93,7 @@
               </div>
 
               <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                {% if eng %}
+                {% if controlled %}
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -104,16 +104,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for id, name in eng.items %}
+                    {% for e in controlled %}
                       {% comment %} {%if s.sale[2:].split(':')[0] == "MA"%} {% endcomment %}
                       <tr>
                         <th scope="row"> {{ forloop.counter }}</th>
-                        <td>{{name}}</td>
+                        <td>{{e.name}}</td>
                         <td> Créé</td>
                         <td>
-                          <form method='post' action="{% url 'myapp:confirm_engagement' id %}">
+                          <form method='post' action="{% url 'myapp:confirm_engagement' e.id %}">
                             {% csrf_token %}
-                            <input type="hidden" name="eng_id" value="{{id}}">
+                            <input type="hidden" name="eng_id" value="{{e.id}}">
                             <button type="submit" class="btn btn-primary">Confirmer</button>
                         </form>
                         </td>

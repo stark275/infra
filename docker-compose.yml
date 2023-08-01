@@ -20,7 +20,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8003
     networks:
       - infra
-###################################################################
+######################## Created Deamon ###########################################
   createddeamon:
     build: .
     volumes:
@@ -35,7 +35,7 @@ services:
     command: ["python3", "./pubsub/createdeamon.py"]
     networks:
       - infra
-###################################
+########################Controlled Deamon ##################################
   controlleddeamon:
     build: .
     volumes:
@@ -50,7 +50,7 @@ services:
     command: ["python3", "./pubsub/controlleddeamon.py"]
     networks:
       - infra
-####################################
+########################### Confirmed Deamon ##############################
   confimeddeamon:
     build: .
     volumes:
@@ -62,10 +62,10 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    command: ["python3", "./pubsub/confimeddeamon.py"]
+    command: ["python3", "./pubsub/confirmeddeamon.py"]
     networks:
       - infra 
-####################################
+########################### Database Execute ##############################
   dbexecutedeamon:
     build: .
     volumes:
@@ -80,7 +80,7 @@ services:
     command: ["python3", "./pubsub/dbexecutedeamon.py"]
     networks:
       - infra 
-##############################################################
+############################# Mysql #################################
   mysql:
     image: mysql
     container_name: mysql
@@ -104,7 +104,7 @@ services:
       retries: 10
     networks:
       - infra
-################################################
+############################# phpMyadmin ###################
   pma:
     image: phpmyadmin/phpmyadmin
     container_name: pma
@@ -119,4 +119,4 @@ services:
     networks:
       - infra
 
-#######################################################
+########################### RabbitMQ ############################

@@ -22,17 +22,10 @@ def index(request):
 
     controlled_engs = mycursor.fetchall()
 
-    
-
-    created_engagements = {
-        "1":"Achat Vehicule",
-        "6":"Renovation Batiment"
-    }
-
+   
     return render(request, 'myapp/index.html',{
-        'eng': created_engagements,
         'engs': created_engs,
-        'controllled' : controlled_engs
+        'controlled' : controlled_engs
     })
 
 def create_engagement(request):
@@ -56,7 +49,7 @@ def control_engagement(request, id):
 def confirm_engagement(request, id):
     eng_id = request.POST.get('eng_id', '')
 
-    # publish_confirm_state(eng_id)
+    publish_confirm_state(eng_id)
 
     print("Engagement Confirmed")
 

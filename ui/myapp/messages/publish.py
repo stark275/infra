@@ -56,7 +56,6 @@ def publish_message(message):
 
 def publish_control_state(message):
 
-    query = 'INSERT INTO engagements(name,created) VALUES("'+str(message)+'","v")'
     sql = 'UPDATE engagements SET controlled = "v" WHERE id = "'+str(message)+'"'
 
     channel.basic_publish(
@@ -66,8 +65,10 @@ def publish_control_state(message):
     )
 
 def publish_confirm_state(message):
+
+    sql = 'UPDATE engagements SET confirmed = "v" WHERE id = "'+str(message)+'"'
     channel.basic_publish(
         exchange=exchange,
         routing_key=confirmed_route_key,
-        body=message 
+        body=sql
     )
