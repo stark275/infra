@@ -3,10 +3,11 @@ import pika
 credentials = pika.PlainCredentials('guest', 'guest')
 connexion = pika.BlockingConnection(
     pika.ConnectionParameters(
-        host='194.163.143.59',
+        host='91.134.181.60',
         port=5672,
         virtual_host='/',
-        credentials=credentials
+        credentials=credentials,
+        heartbeat=0
     )
 )
 
@@ -55,12 +56,13 @@ def publish_message(message):
 
 def publish_control_state(message):
 
-    
+    query = 'INSERT INTO engagements(name,created) VALUES("'+str(message)+'","v")'
+    sql = 'UPDATE engagements SET controlled = "v" WHERE id = "'+str(message)+'"'
 
     channel.basic_publish(
         exchange=exchange,
         routing_key=controlled_route_key,
-        body=message 
+        body=sql
     )
 
 def publish_confirm_state(message):

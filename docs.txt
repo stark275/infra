@@ -1,0 +1,44 @@
+Container Health check
+https://stackoverflow.com/questions/42567475/docker-compose-check-if-mysql-connection-is-ready
+
+How to use string.replace() in python 3.x
+https://stackoverflow.com/questions/9452108/how-to-use-string-replace-in-python-3-x
+
+Is it recommended to run systemd inside docker container?
+https://stackoverflow.com/questions/51979553/is-it-recommended-to-run-systemd-inside-docker-container
+
+Restart Docker container on inner process crash
+https://stackoverflow.com/questions/56583099/restart-docker-container-on-inner-process-crash
+
+Build Docker image
+https://devopscube.com/build-docker-image/
+
+Systemmd with python
+https://medium.com/codex/setup-a-python-script-as-a-service-through-systemctl-systemd-f0cc55a42267
+
+Docker Compose - How to execute multiple commands?
+https://stackoverflow.com/questions/30063907/docker-compose-how-to-execute-multiple-commands
+
+Restart Docker container on inner process crash
+https://stackoverflow.com/questions/56583099/restart-docker-container-on-inner-process-crash
+
+How to see the logs of a docker container
+https://stackoverflow.com/questions/47829345/how-to-see-the-logs-of-a-docker-container
+
+Docker - How to check Docker container logs real-time update in terminal?
+https://stackoverflow.com/questions/70562059/docker-how-to-check-docker-container-logs-real-time-update-in-terminal
+
+docker-compose up for only certain containers
+https://stackoverflow.com/questions/30233105/docker-compose-up-for-only-certain-containers
+
+How to disable heartbeats with pika and rabbitmq
+https://stackoverflow.com/questions/51752890/how-to-disable-heartbeats-with-pika-and-rabbitmq
+
+DOCKER ON UBUNTU 20.04 RASPBERRY PI 4
+https://omar2cloud.github.io/rasp/rpidock/
+
+Building Multi-CPU Architecture Docker Images for ARM and x86 (1): The Basics
+https://itnext.io/building-multi-cpu-architecture-docker-images-for-arm-and-x86-1-the-basics-2fa97869a99b
+
+Microbot
+https://cloudyuga.guru/blog/microk8s

@@ -8,7 +8,7 @@ def index(request):
     
     created_engagements = {
         "1":"Achat Vehicule",
-        "2":"Renovation Batiment"
+        "6":"Renovation Batiment"
     }
 
     return render(request, 'myapp/index.html',{
@@ -35,9 +35,9 @@ def control_engagement(request, id):
 def confirm_engagement(request, id):
     eng_id = request.POST.get('eng_id', '')
 
-    publish_confirm_state(eng_id)
+    # publish_confirm_state(eng_id)
 
-    print("Engagement Confirm")
+    print("Engagement Confirmed")
 
     return HttpResponseRedirect(reverse("myapp:index"))
 

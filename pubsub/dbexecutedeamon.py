@@ -4,7 +4,7 @@ import mysql.connector
 credentials = pika.PlainCredentials('guest', 'guest')
 connexion = pika.BlockingConnection(
     pika.ConnectionParameters(
-        host='194.163.143.59',
+        host='91.134.181.60',
         port=5672,
         virtual_host='/',
         credentials=credentials
@@ -14,11 +14,11 @@ connexion = pika.BlockingConnection(
 channel = connexion.channel()
 
 mydb = mysql.connector.connect(
-        host="localhost",
+        host="mysql",
         user="root",
         password="root",    
-        database="compta",
-        port="33077"
+        database="compta"
+        # port="33077"
     )
 
 def getDb():
@@ -55,8 +55,6 @@ def callback(ch, method, props, body):
     print(mycursor.rowcount, "success!")
 
     
-
-
 channel.basic_consume(
     queue='db.execute',
     on_message_callback=callback,

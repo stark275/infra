@@ -4,6 +4,18 @@ networks:
   infra:
 
 services:
+
+############### UI ####################################
+  app:
+    build: ./ui
+    volumes:
+      - ./ui:/django
+    ports:
+      - 8003:8003
+    image: app:ui
+    container_name: ui
+    command: python manage.py runserver 0.0.0.0:8003
+###################################################################
   createddeamon:
     build: .
     volumes:
@@ -17,7 +29,7 @@ services:
     command: ["python3", "./pubsub/createdeamon.py"]
     networks:
       - infra
-
+###################################
   controlleddeamon:
     build: .
     volumes:
@@ -31,7 +43,7 @@ services:
     command: ["python3", "./pubsub/controlleddeamon.py"]
     networks:
       - infra
-
+####################################
   confimeddeamon:
     build: .
     volumes:
@@ -45,7 +57,7 @@ services:
     command: ["python3", "./pubsub/confimeddeamon.py"]
     networks:
       - infra 
-
+####################################
   dbexecutedeamon:
     build: .
     volumes:
@@ -59,7 +71,7 @@ services:
     command: ["python3", "./pubsub/dbexecutedeamon.py"]
     networks:
       - infra 
-  
+##############################################################
   mysql:
     image: mysql
     container_name: mysql
@@ -83,6 +95,7 @@ services:
       retries: 10
     networks:
       - infra
+################################################
   pma:
     image: phpmyadmin/phpmyadmin
     container_name: pma
@@ -96,3 +109,5 @@ services:
         condition: service_healthy
     networks:
       - infra
+
+#######################################################
