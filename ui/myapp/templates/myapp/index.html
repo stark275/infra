@@ -67,16 +67,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for id, name in eng.items %}
+
+                    {{ engs | pprint }}
+                    {% for e in engs %}
                       {% comment %} {%if s.sale[2:].split(':')[0] == "MA"%} {% endcomment %}
                       <tr>
                         <th scope="row"> {{ forloop.counter }}</th>
-                        <td>{{name}}</td>
+                        <td>{{e.name}}</td>
                         <td> Créé</td>
                         <td>
-                          <form method='post' action="{% url 'myapp:control_engagement' id %}">
+                          <form method='post' action="{% url 'myapp:control_engagement' e.id %}">
                             {% csrf_token %}
-                            <input type="hidden" name="eng_id" value="{{id}}">
+                            <input type="hidden" name="eng_id" value="{{e.id}}">
                             <button type="submit" class="btn btn-primary">Controller</button>
                         </form>
                         </td>

@@ -14,7 +14,12 @@ services:
       - 8003:8003
     image: app:ui
     container_name: ui
+    depends_on:
+      mysql:
+        condition: service_healthy
     command: python manage.py runserver 0.0.0.0:8003
+    networks:
+      - infra
 ###################################################################
   createddeamon:
     build: .
