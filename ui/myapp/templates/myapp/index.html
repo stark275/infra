@@ -68,7 +68,7 @@
                   </thead>
                   <tbody>
 
-                    {{ engs | pprint }}
+                    {% comment %} {{ engs | pprint }} {% endcomment %}
                     {% for e in engs %}
                       {% comment %} {%if s.sale[2:].split(':')[0] == "MA"%} {% endcomment %}
                       <tr>

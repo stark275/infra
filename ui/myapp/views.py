@@ -9,13 +9,7 @@ import mysql.connector
 # Create your views here.
 def index(request):
 
-    mydb = mysql.connector.connect(
-        host="mysql",
-        user="root",
-        password="root",    
-        database="compta",
-        port="3306"
-    )
+    mydb = getDb()
     
     mycursor = mydb.cursor(dictionary=True)
 
@@ -23,6 +17,10 @@ def index(request):
 
     created_engs = mycursor.fetchall()
     print(created_engs)
+
+    mycursor.execute("SELECT * FROM engagements WHERE created='v' AND controlled='v' AND confirmed='f'")
+
+    controlled_engs = mycursor.fetchall()
 
     
 
@@ -34,6 +32,7 @@ def index(request):
     return render(request, 'myapp/index.html',{
         'eng': created_engagements,
         'engs': created_engs,
+        'controllled' : controlled_engs
     })
 
 def create_engagement(request):
@@ -64,15 +63,12 @@ def confirm_engagement(request, id):
     return HttpResponseRedirect(reverse("myapp:index"))
 
 def getDb():
+    return mysql.connector.connect(
+        host="mysql",
+        user="root",
+        password="root",    
+        database="compta",
+        port="3306"
+    )
     
-    
-    mycursor = mydb.cursor()
-
-    sql = "INSERT INTO engagements (name) VALUES (%s)"
-    val = ("achat Vehicule",)
-    mycursor.execute(sql, val)
-
-    mydb.commit()
-
-    print(mycursor.rowcount, "record inserted.")
 
